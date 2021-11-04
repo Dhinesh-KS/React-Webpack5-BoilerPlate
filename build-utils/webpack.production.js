@@ -1,18 +1,19 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const path = require("path");
 
 module.exports = () => ({
   devtool: "nosources-source-map",
   optimization: {
+    minimize: true,
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true, // set to true if you want JS source maps for css
-      }),
-      new OptimizeCSSAssetsPlugin({}),
+      // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
+      `...`,
+      new CssMinimizerPlugin(),
     ],
+    runtimeChunk: {
+      name: "runtime",
+    },
   },
   performance: {
     hints: false,

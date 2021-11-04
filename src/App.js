@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Base Project Setup!!!</h1>
+        <h1>Base Project Setup!!!!</h1>
         <p>{`The count now is: ${this.state.counter}`}</p>
         <img src={logo} style={{ width: "50px", height: "50px" }} alt="logo" />
         <button onClick={this.handleClick}>Click here</button>

@@ -12,7 +12,19 @@ module.exports = () => ({
             loader: "babel-loader",
             options: {
               compact: false,
-              presets: ["@babel/preset-env", "@babel/preset-react"],
+              presets: [
+                "@babel/preset-react",
+                [
+                  "@babel/preset-env",
+                  {
+                    targets: {
+                      browsers: "last 2 versions",
+                    },
+                    modules: false,
+                    loose: false,
+                  },
+                ],
+              ],
               sourceType: "unambiguous",
               plugins: [
                 [
@@ -22,6 +34,8 @@ module.exports = () => ({
                   },
                 ],
                 "@babel/plugin-proposal-class-properties",
+                "react-hot-loader/babel",
+                "syntax-dynamic-import",
               ],
             },
           },

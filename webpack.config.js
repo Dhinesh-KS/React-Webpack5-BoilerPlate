@@ -4,8 +4,8 @@ const { merge } = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const modeConfiguration = (env) => require(`./build-utils/webpack.${env}`)(env);
 
-module.exports = ({ mode } = { mode: "production" }) => {
-  console.log(`App is running in "${mode}" mode.`);
+module.exports = ({ mode, currentProcess } = { mode: "production", currentProcess: "running" }) => {
+  console.log(`App is ${currentProcess} in "${mode}" mode.`);
 
   return merge(
     {

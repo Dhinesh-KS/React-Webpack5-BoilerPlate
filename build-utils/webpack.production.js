@@ -1,8 +1,10 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const path = require("path");
+const isAnalyze = typeof process.env.BUNDLE_ANALYZE !== "undefined";
 
-module.exports = () => ({
+const prodSetting = {
   devtool: "nosources-source-map",
   optimization: {
     minimize: true,
@@ -78,4 +80,10 @@ module.exports = () => ({
       chunkFilename: "[id].css",
     }),
   ],
-});
+};
+
+if (isAnalyze) {
+  prodSetting.plugins.push(new BundleAnalyzerPlugin());
+}
+
+module.exports = () => prodSetting;

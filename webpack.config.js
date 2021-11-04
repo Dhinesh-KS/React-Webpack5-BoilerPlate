@@ -29,6 +29,20 @@ module.exports = ({ mode } = { mode: "production" }) => {
           chunks: "all",
         },
       },
+      module: {
+        rules: [
+          // Images
+          {
+            test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+            type: "asset/resource",
+          },
+          // Fonts and SVGs
+          {
+            test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+            type: "asset/inline",
+          },
+        ],
+      },
       plugins: [
         new HtmlWebpackPlugin({
           template: path.resolve(__dirname, "public/index.html"),

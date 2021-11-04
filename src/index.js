@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import LoadableApp from "./LoadableApp";
 import reportWebVitals from "./reportWebVitals";
+import "./fonts/Poppins-Medium.ttf";
 
 const rootId = document.getElementById("root");
 

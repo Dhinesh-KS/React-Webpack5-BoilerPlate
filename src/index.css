@@ -1,1 +1,8 @@
-
+@font-face {
+    font-family: "Catamaran";
+    src: url("./fonts/Catamaran-ExtraLight.ttf") format("truetype");
+  }
+  
+  * {
+    font-family: "Catamaran", sans-serif !important;
+  }

@@ -4,43 +4,43 @@ module.exports = () => ({
   devtool: "eval-cheap-module-source-map",
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: path.resolve(__dirname, "node_modules"),
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              compact: false,
-              presets: [
-                "@babel/preset-react",
-                [
-                  "@babel/preset-env",
-                  {
-                    targets: {
-                      browsers: "last 2 versions",
-                    },
-                    modules: false,
-                    loose: false,
-                  },
-                ],
-              ],
-              sourceType: "unambiguous",
-              plugins: [
-                [
-                  "@babel/plugin-transform-runtime",
-                  {
-                    regenerator: true,
-                  },
-                ],
-                "@babel/plugin-proposal-class-properties",
-                "react-hot-loader/babel",
-                "syntax-dynamic-import",
-              ],
-            },
-          },
-        ],
-      },
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   exclude: path.resolve(__dirname, "node_modules"),
+      //   use: [
+      //     {
+      //       loader: "babel-loader",
+      //       options: {
+      //         compact: false,
+      //         presets: [
+      //           "@babel/preset-react",
+      //           [
+      //             "@babel/preset-env",
+      //             {
+      //               targets: {
+      //                 browsers: "last 2 versions",
+      //               },
+      //               modules: false,
+      //               loose: false,
+      //             },
+      //           ],
+      //         ],
+      //         sourceType: "unambiguous",
+      //         plugins: [
+      //           [
+      //             "@babel/plugin-transform-runtime",
+      //             {
+      //               regenerator: true,
+      //             },
+      //           ],
+      //           "@babel/plugin-proposal-class-properties",
+      //           "react-hot-loader/babel",
+      //           "syntax-dynamic-import",
+      //         ],
+      //       },
+      //     },
+      //   ],
+      // },
       // CSS, PostCSS, and Sass
       {
         test: /\.(scss|css)$/,

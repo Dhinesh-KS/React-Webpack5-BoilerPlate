@@ -31,6 +31,11 @@ module.exports = ({ mode, currentProcess } = { mode: "production", currentProces
       },
       module: {
         rules: [
+          {
+            test: /\.(js|jsx)$/,
+            exclude: /node_modules/,
+            loader: "babel-loader",
+          },
           // Images
           {
             test: /\.(?:ico|gif|png|jpg|jpeg)$/i,

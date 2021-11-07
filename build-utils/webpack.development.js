@@ -1,7 +1,16 @@
 const path = require("path");
 
 module.exports = () => ({
+  // Control how source maps are generated
   devtool: "eval-cheap-module-source-map",
+  // Spin up a server for quick development
+  devServer: {
+    historyApiFallback: true,
+    compress: true,
+    hot: true,
+    open: true,
+    port: 9080,
+  },
   module: {
     rules: [
       // {

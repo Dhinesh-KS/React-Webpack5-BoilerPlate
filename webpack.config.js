@@ -10,14 +10,10 @@ module.exports = ({ mode, currentProcess } = { mode: "production", currentProces
   return merge(
     {
       mode,
+      // Where webpack looks to start building the bundle
       entry: path.resolve(__dirname, "src/index.js"),
-      devServer: {
-        hot: true,
-        open: true,
-        port: 9080,
-      },
       resolve: {
-        extensions: [".js", ".jsx"],
+        extensions: [".js", ".jsx", ".json"],
       },
       output: {
         publicPath: "/",
@@ -29,8 +25,10 @@ module.exports = ({ mode, currentProcess } = { mode: "production", currentProces
           chunks: "all",
         },
       },
+      // Determine how modules within the project are treated
       module: {
         rules: [
+          // JavaScript: Use Babel to transpile JavaScript files
           {
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
@@ -48,12 +46,18 @@ module.exports = ({ mode, currentProcess } = { mode: "production", currentProces
           },
         ],
       },
+      // To customize the webpack build process
       plugins: [
+        // Generates an HTML file from a template
         new HtmlWebpackPlugin({
           template: path.resolve(__dirname, "public/index.html"),
           favicon: path.resolve(__dirname, "public/favicon.ico"),
         }),
-        new webpack.HotModuleReplacementPlugin(),
+        //new webpack.HotModuleReplacementPlugin(),
+        // To extract build progress information
+        new webpack.ProgressPlugin((percentage, message) => {
+          console.log(`${(percentage * 100).toFixed()}% ${message}`);
+        }),
       ],
     },
     modeConfiguration(mode)

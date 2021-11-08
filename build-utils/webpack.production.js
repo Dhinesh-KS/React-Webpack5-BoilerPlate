@@ -1,7 +1,7 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
 const isAnalyze = typeof process.env.BUNDLE_ANALYZE !== "undefined";
 
 const prodSetting = {
@@ -9,8 +9,9 @@ const prodSetting = {
   optimization: {
     minimize: true,
     minimizer: [
-      // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
-      `...`,
+      new TerserPlugin({
+        parallel: 4,
+      }),
       new CssMinimizerPlugin(),
     ],
     runtimeChunk: {
@@ -19,42 +20,11 @@ const prodSetting = {
   },
   performance: {
     hints: false,
-    maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
+    maxEntrypointSize: 1000 * 512, //KiB
+    maxAssetSize: 1000 * 512, //KiB
   },
   module: {
     rules: [
-      //babel loader
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   exclude: path.resolve(__dirname, "node_modules"),
-      //   use: [
-      //     {
-      //       loader: "babel-loader",
-      //       options: {
-      //         compact: false,
-      //         presets: [
-      //           "@babel/preset-react",
-      //           [
-      //             "@babel/preset-env",
-      //             {
-      //               targets: {
-      //                 browsers: "last 2 versions",
-      //               },
-      //               modules: false,
-      //               loose: false,
-      //             },
-      //           ],
-      //         ],
-      //         plugins: [
-      //           "@babel/plugin-proposal-class-properties",
-      //           "react-hot-loader/babel",
-      //           "syntax-dynamic-import",
-      //         ],
-      //       },
-      //     },
-      //   ],
-      // },
       // CSS, PostCSS, and Sass
       {
         test: /\.(scss|css)$/,

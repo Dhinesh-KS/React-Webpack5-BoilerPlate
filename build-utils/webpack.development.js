@@ -1,5 +1,3 @@
-const path = require("path");
-
 module.exports = () => ({
   // Control how source maps are generated
   devtool: "eval-cheap-module-source-map",
@@ -10,46 +8,20 @@ module.exports = () => ({
     hot: true,
     open: true,
     port: 9080,
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+    },
+  },
+  performance: {
+    hints: "warning",
+    maxEntrypointSize: 1000 * 512, //KiB
+    maxAssetSize: 1000 * 512, //KiB
   },
   module: {
     rules: [
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   exclude: path.resolve(__dirname, "node_modules"),
-      //   use: [
-      //     {
-      //       loader: "babel-loader",
-      //       options: {
-      //         compact: false,
-      //         presets: [
-      //           "@babel/preset-react",
-      //           [
-      //             "@babel/preset-env",
-      //             {
-      //               targets: {
-      //                 browsers: "last 2 versions",
-      //               },
-      //               modules: false,
-      //               loose: false,
-      //             },
-      //           ],
-      //         ],
-      //         sourceType: "unambiguous",
-      //         plugins: [
-      //           [
-      //             "@babel/plugin-transform-runtime",
-      //             {
-      //               regenerator: true,
-      //             },
-      //           ],
-      //           "@babel/plugin-proposal-class-properties",
-      //           "react-hot-loader/babel",
-      //           "syntax-dynamic-import",
-      //         ],
-      //       },
-      //     },
-      //   ],
-      // },
       // CSS, PostCSS, and Sass
       {
         test: /\.(scss|css)$/,

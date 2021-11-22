@@ -44,6 +44,11 @@ module.exports = ({ mode, currentProcess } = { mode: "production", currentProces
             test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
             type: "asset/inline",
           },
+          // Load csv files
+          {
+            test: /\.(csv|tsv)$/i,
+            use: ["csv-loader"],
+          },
         ],
       },
       // To customize the webpack build process
